@@ -11,7 +11,8 @@ defmodule Poll do
       supervisor(Poll.Endpoint, []),
       # Here you could define other workers and supervisors as children
       # worker(Poll.Worker, [arg1, arg2, arg3]),
-      worker(Poll.Database, [])
+      worker(Poll.Database, []),
+      #worker(Poll.PersonFeed, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -30,4 +31,29 @@ end
 
 defmodule Poll.Database do
   use RethinkDB.Connection
+end
+
+
+defmodule Poll.PersonFeed do
+  use RethinkDB.Connection
+  import RethinkDB.Query
+  use RethinkDB.Changefeed
+
+  def init do
+    db = db("poll")
+    query = db
+    |> table("geo")
+    |> changes 
+    |> Poll.Database.run
+    {:subscribe, query, db, nil}
+  end
+
+
+  def handle_update(%{"new_value" => data}, _) do
+    {:next, data}
+  end
+
+  def handle_call(:get,_from,data) do
+    {:reply, data, data}
+  end
 end
