@@ -1,8 +1,76 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
   <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+
+
+<div id="status">
 </div>
 
+<%= link "New post", to: register_path(@conn, :index),action: register_path(@conn, :create) %>
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=429349617258298";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+     FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+      });
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '429349617258298',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.5' // use version 2.2
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+</script>
+</div>
+<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
 <div class="row marketing">
   <div class="col-lg-6">
     <h4>Resources</h4>
@@ -37,3 +105,116 @@
     </ul>
   </div>
 </div>
+<div id="map" class="map"></div>
+    <script>
+    </script>
+<script type="text/javascript">
+
+ 
+var features = [];
+
+$.ajax({
+    url: '/register',
+    dataType: 'json',
+    async: false,
+    success: function(json1) {
+        $.each(json1, function (key, data) {
+            if (key == 'data') {
+                $.each(data, function (k, v) {
+                    if (v.type=='Point') {
+                        //console.log(v.geometry.coordinates);
+                        if (v.coordinates.length>1) {
+                            features[k] = new ol.Feature(new ol.geom.Point(ol.proj.transform(v.coordinates, 'EPSG:4326', 'EPSG:3857')));
+                        }
+                    }
+                });
+            }
+        });
+    }
+});
+var source = new ol.source.Vector({
+  features: features
+});
+
+var clusterSource = new ol.source.Cluster({
+  distance: 40,
+  source: source
+});
+
+var styleCache = {};
+var clusters = new ol.layer.Vector({
+  source: clusterSource,
+  style: function(feature, resolution) {
+    var size = feature.get('features').length;
+    var style = styleCache[size];
+    if (!style) {
+      style = [new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: 50,
+          stroke: new ol.style.Stroke({
+            color: '#fff'
+          }),
+          fill: new ol.style.Fill({
+            color: '#3399CC'
+          })
+        }),
+        text: new ol.style.Text({
+          text: size.toString(),
+          fill: new ol.style.Fill({
+            color: '#fff'
+          })
+        })
+      })];
+      styleCache[size] = style;
+    }
+    return style;
+  }
+});
+
+var raster = new ol.layer.Tile({
+  source: new ol.source.MapQuest({layer: 'sat'})
+});
+
+var raw = new ol.layer.Vector({
+  source: source
+});
+
+
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.Stamen({
+                    layer: 'watercolor'
+                })
+            }),
+             /* Cluster heat map new ol.layer.Tile({
+                source: new ol.source.TileJSON({
+                    url: 'http://api.tiles.mapbox.com/v3/' +
+                        'mapbox.20110804-hoa-foodinsecurity-3month.jsonp',
+                    crossOrigin: 'anonymous'
+                })
+            }),*/
+            new ol.layer.Tile({
+                source: new ol.source.TileJSON({
+                    url: 'http://api.tiles.mapbox.com/v3/' +
+                        'mapbox.world-borders-light.jsonp',
+                    crossOrigin: 'anonymous'
+                })
+            }),
+            new ol.layer.Tile({
+                source: new ol.source.Stamen({
+                    layer: 'terrain-labels'
+                })
+            }),
+     clusters
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: ol.proj.transform(
+            [123.995087, 10.405683], 'EPSG:4326', 'EPSG:3857'),
+            zoom: 7
+        })
+    });
+
+</script>
+
