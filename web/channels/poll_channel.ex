@@ -18,7 +18,7 @@ defmodule Poll.PollChannel do
   	|> pluck("location") 
   	|> map( RethinkDB.Lambda.lambda fn (record) -> record[:location] |> to_geojson end) 
     result = run(query)
-    IO.inspect result
+    
     Enum.each(result.data, fn message ->  push socket, "new:msg", message end)
 
     changes = changes(query)
@@ -26,7 +26,6 @@ defmodule Poll.PollChannel do
 
     Task.async fn ->
       Enum.each(changes, fn change ->
-    	IO.inspect changes
         push socket, "new:msg", change["new_val"]
       end)
     end

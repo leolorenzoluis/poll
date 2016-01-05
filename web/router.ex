@@ -1,5 +1,6 @@
 defmodule Poll.Router do
   use Poll.Web, :router
+  require Ueberauth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -19,6 +20,14 @@ defmodule Poll.Router do
     get "/", PageController, :index
 
     resources "register", RegisterController, only: [:index, :create]
+  end
+
+  scope "/auth", Poll do
+    pipe_through :browser
+    get "/:provider", AuthenticationController, :request
+    get "/:provider/callback", AuthenticationController, :callback
+    post "/:provider/callback", AuthenticationController, :callback
+    delete "/logout", AuthenticationController, :delete
   end
 
   # Other scopes may use custom stacks.

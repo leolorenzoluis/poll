@@ -17,7 +17,7 @@ defmodule Poll.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Poll, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext]]
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :ueberauth, :ueberauth_facebook]]
   end
 
   # Specifies which paths to compile per environment.
@@ -33,6 +33,8 @@ defmodule Poll.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:rethinkdb, "~> 0.2.2"},
      {:gettext, "~> 0.9"},
+     {:ueberauth, "~> 0.2"},
+     {:ueberauth_facebook, "~>0.2"},
      {:cowboy, "~> 1.0"}]
   end
 end
