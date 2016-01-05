@@ -8,3 +8,12 @@ config :poll, Poll.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Configure your database
+config :poll, Poll.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "poll_test",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox

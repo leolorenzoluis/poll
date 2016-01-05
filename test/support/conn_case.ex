@@ -28,7 +28,6 @@ defmodule Poll.ConnCase do
   end
 
   setup tags do
-
     {:ok, conn: Phoenix.ConnTest.conn()}
   end
 end

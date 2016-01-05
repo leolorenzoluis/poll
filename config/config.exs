@@ -22,3 +22,16 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :ueberauth, Ueberauth,
+  providers: [
+  	facebook: { Ueberauth.Strategy.Facebook, [] }
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+ client_id: "429349617258298",
+ client_secret: "9188b6cd80b00fe7e2273fdc987a4bc8"
+# Configure phoenix generators
+config :phoenix, :generators,
+  migration: true,
+  binary_id: false
