@@ -263,7 +263,7 @@ channel.join()
 
 channel.on("new:msg", msg => {
 
-          //source.addFeature(new ol.Feature(new ol.geom.Point(ol.proj.transform(msg.coordinates, 'EPSG:4326', 'EPSG:3857'))));
+          source.addFeature(new ol.Feature(new ol.geom.Point(ol.proj.transform(msg.coordinates, 'EPSG:4326', 'EPSG:3857'))));
           //$messages.append(JSON.stringify(msg.coordinates)) 
           //scrollTo(0, document.body.scrollHeight)
         })

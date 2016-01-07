@@ -30,6 +30,18 @@ defmodule Poll.Router do
     delete "/logout", AuthenticationController, :delete
   end
 
+  scope "/candidates", Poll do
+    pipe_through :browser
+
+    get "/", CandidatesController, :index
+  end
+
+  scope "/vote", Poll do
+    pipe_through :browser
+
+    get "/", VoteController, :index
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Poll do
   #   pipe_through :api

@@ -28,9 +28,6 @@ config :ueberauth, Ueberauth,
   	facebook: { Ueberauth.Strategy.Facebook, [] }
   ]
 
-config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
- client_id: "429349617258298",
- client_secret: "9188b6cd80b00fe7e2273fdc987a4bc8"
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,

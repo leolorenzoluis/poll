@@ -1,0 +1,25 @@
+{
+  "name": "Poll",
+  "description": "",
+  "main": "",
+  "license": "Apache",
+  "keywords": [
+    "poll"
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "bootstrap-material-design": "~0.5.7"
+  }
+}
