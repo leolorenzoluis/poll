@@ -1,5 +1,32 @@
-<div class="jumbotron">
-    <h2>Simple CRUD app using Phoenix and Elixir!</h2>
-    <p class="lead">First try at getting a basic crud app up and working with Phoenix.</p>
-    
-  </div>
+<div class="col-sm-4">
+	<h1>Presidents</h1>
+</div>
+
+<div class="well col-sm-8">
+	<%= for chunk <- @presidents do %>
+	<div class="row">
+	    <div class="row-height">
+			<%= for user <- chunk do %>
+			<%= if not is_nil(user) do %>
+	    	<div class="col-sm-6 col-sm-height">
+	        	<div class="inside ">
+	          		<div class="content col-xs-12">
+		          		<div class="col-xs-12"><%= user["firstname"] %> <%= user["lastname"] %></div>
+		          		<div class="col-xs-12"><%= user["party"] %> </div>
+		          		<div class="col-xs-12">
+		          			<%= form_tag("/vote", method: :post) %>
+		          				<button type="submit" class="col-xs-12 btn btn-raised btn-primary">Vote</a>
+		          			</form>
+	          			</div>
+			        </div>
+		        </div>
+      		</div>
+      		<% else %>
+      		<div class="col-sm-6 col-sm-height">
+      		</div>
+			<% end %>
+			<% end %>
+		</div>   
+  	</div>
+	<% end %>
+</div>
