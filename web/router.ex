@@ -40,6 +40,7 @@ defmodule Poll.Router do
     pipe_through :browser
 
     get "/", VoteController, :index
+    post "/", VoteController, :create
   end
 
   # Other scopes may use custom stacks.
