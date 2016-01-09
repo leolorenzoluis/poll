@@ -11,7 +11,7 @@ defmodule Poll.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["json-api"]
   end
 
   scope "/", Poll do
@@ -33,7 +33,7 @@ defmodule Poll.Router do
   scope "/candidates", Poll do
     pipe_through :browser
 
-    get "/", CandidatesController, :index
+    #get "/", CandidatesController, :index
   end
 
   scope "/vote", Poll do
@@ -44,7 +44,9 @@ defmodule Poll.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Poll do
-  #   pipe_through :api
-  # end
+   scope "/api", Poll do
+     pipe_through :api
+
+     resources "/geo", CandidatesController
+   end
 end

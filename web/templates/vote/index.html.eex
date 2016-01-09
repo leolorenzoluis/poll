@@ -1,7 +1,9 @@
 <div class="col-sm-4">
 	<h1>Presidents</h1>
+	<p>
+		The head of state and head of government of the Philippines. The President leads the executive branch of the Philippines
+	</p>
 </div>
-
 <div class="well col-sm-8">
 	<%= for chunk <- @presidents do %>
 	<div class="row">
@@ -15,7 +17,10 @@
 		          		<div class="col-xs-12"><%= user["party"] %> </div>
 		          		<div class="col-xs-12">
 		          			<%= form_tag("/vote", method: :post) %>
+		          				<div class="form-group">
+		          				<input name="candidate" for="user[content]" type="hidden" value="<%= user["id"] <> " " <> user["lastname"]%>"/>
 		          				<button type="submit" class="col-xs-12 btn btn-raised btn-primary">Vote</a>
+		          				</div>
 		          			</form>
 	          			</div>
 			        </div>

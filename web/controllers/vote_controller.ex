@@ -31,9 +31,11 @@ defmodule Poll.VoteController do
   end
 
   def create(conn, _params) do
-    IO.puts "hello created!"
+    
+    IO.inspect  _params
 
     conn 
+      |> put_flash(:info, "Successfully authenticated.")
       |> assign(:current_user, nil)
       |> assign(:presidents, [])
       |> render("index.html")
