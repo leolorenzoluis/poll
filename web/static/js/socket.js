@@ -54,7 +54,6 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 
-var features = [];
 
 /*$.ajax({
     url: '/register',
@@ -76,52 +75,112 @@ var features = [];
         });
     }
 });*/
-var source = new ol.source.Vector({
-  features: features
-});
+var image = new ol.style.Circle({
+            radius: 5,
+            fill: null,
+            stroke: new ol.style.Stroke({color: 'red', width: 1})
+          });
 
-var clusterSource = new ol.source.Cluster({
-  distance: 40,
-  source: source
-});
+          var styles = {
+            'Point': new ol.style.Style({
+              image: image
+            }),
+            'LineString': new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: 'green',
+                width: 1
+              })
+            }),
+            'MultiLineString': new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: 'green',
+                width: 1
+              })
+            }),
+            'MultiPoint': new ol.style.Style({
+              image: image
+            }),
+            'MultiPolygon': new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: 'red',
+                lineDash: [4],
+                width: 3
+              }),
+              fill: new ol.style.Fill({
+                color: 'red'
+              })
+            }),
+            'Polygon': new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: 'blue',
+                lineDash: [4],
+                width: 3
+              }),
+              fill: new ol.style.Fill({
+                color: 'blue'
+              })
+            }),
+            'GeometryCollection': new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: 'magenta',
+                width: 2
+              }),
+              fill: new ol.style.Fill({
+                color: 'magenta'
+              }),
+              image: new ol.style.Circle({
+                radius: 10,
+                fill: null,
+                stroke: new ol.style.Stroke({
+                  color: 'magenta'
+                })
+              })
+            }),
+            'Circle': new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+              }),
+              fill: new ol.style.Fill({
+                color: 'rgba(255,0,0,0.2)'
+              })
+            })
+          };
 
-var styleCache = {};
-var clusters = new ol.layer.Vector({
-  source: clusterSource,
-  style: function(feature, resolution) {
-    var size = feature.get('features').length;
-    var style = styleCache[size];
-    if (!style) {
-      style = [new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 50,
-          stroke: new ol.style.Stroke({
-            color: '#fff'
-          }),
-          fill: new ol.style.Fill({
-            color: '#3399CC'
-          })
-        }),
-        text: new ol.style.Text({
-          text: size.toString(),
-          fill: new ol.style.Fill({
-            color: '#fff'
-          })
-        })
-      })];
-      styleCache[size] = style;
+          var styleFunction = function(feature, resolution) {
+            return styles[feature.getGeometry().getType()];
+          };
+
+            //proj4.defs('EPSG:25394', '+proj=tmerc +lat_0=0 +lon_0=123 +k=0.99995 +x_0=500000 +y_0=0 +ellps=clrk66 +towgs84=-133,-77,-51,0,0,0,0 +units=m +no_defs');
+            //var proj27700 = ol.proj.get('EPSG:25394');
+/*var geojsonObject;
+$.ajax({
+    url: '/api/geo',
+    dataType: 'json',
+    async: false,
+    success: function(json1) {
+        geojsonObject = json1;
     }
-    return style;
-  }
-});
+});*/
 
-var raster = new ol.layer.Tile({
-  source: new ol.source.MapQuest({layer: 'sat'})
-});
 
-var raw = new ol.layer.Vector({
-  source: source
-});
+
+          var vectorSource = new ol.source.Vector({
+            url: '/api/geo',
+            format: new ol.format.GeoJSON({
+                projection: 'EPSG:4326',
+                defaultDataProjection: 'EPSG:4326'
+            })
+          });
+
+          //vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
+
+          var vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: styleFunction
+          });
+
+
 
 
     var map = new ol.Map({
@@ -130,7 +189,7 @@ var raw = new ol.layer.Vector({
                 source: new ol.source.Stamen({
                     layer: 'watercolor'
                 })
-            }),
+            }), 
              /* Cluster heat map new ol.layer.Tile({
                 source: new ol.source.TileJSON({
                     url: 'http://api.tiles.mapbox.com/v3/' +
@@ -148,16 +207,55 @@ var raw = new ol.layer.Vector({
             new ol.layer.Tile({
                 source: new ol.source.Stamen({
                     layer: 'terrain-labels'
-                })
+                }),
+
             }),
-     clusters
+            vectorLayer
         ],
         target: 'map',
         view: new ol.View({
-            center: ol.proj.transform(
-            [123.995087, 10.405683], 'EPSG:4326', 'EPSG:3857'),
+          projection:'EPSG:4326',
+            center: [123.995087, 10.405683],
+            //center: ol.proj.transform([123.995087, 10.405683], 'EPSG:4326', 'EPSG:3857'),
             zoom: 7
         })
+    });
+
+    var info = $('#info');
+    info.tooltip({
+      animation: false,
+      trigger: 'manual'
+    });
+
+    var displayFeatureInfo = function(pixel){
+      info.css({
+        left:pixel[0] + 'px',
+        top: (pixel[1] -15) + 'px'
+      });
+      var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+        return feature;
+      });
+      if(feature) {
+        info.tooltip('hide')
+            .attr('data-original-title', feature.get('NAME_1'))
+            .tooltip('fixTitle')
+            .tooltip('show');
+      }
+      else {
+        info.tooltip('hide');
+      }
+    };
+
+    map.on('pointermove', function(evt){
+      if(evt.dragging){
+        info.tooltip('hide');
+        return;
+      }
+      displayFeatureInfo(map.getEventPixel(evt.originalEvent));
+    });
+
+    map.on('click', function(evt){
+      displayFeatureInfo(evt.pixel);
     });
 
 
