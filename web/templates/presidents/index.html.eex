@@ -5,22 +5,22 @@
 	</p>
 </div>
 <div class="well col-sm-8">
-	<%= for chunk <- @presidents do %>
+	<%= for chunk <- @candidates do %>
 	<div class="row">
 	    <div class="row-height">
-			<%= for user <- chunk do %>
-			<%= if not is_nil(user) do %>
+			<%= for candidate <- chunk do %>
+			<%= if not is_nil(candidate) do %>
 	    	<div class="col-sm-6 col-sm-height">
 	        	<div class="inside ">
 	          		<div class="content col-xs-12">
-		          		<div class="col-xs-12"><%= user["firstname"] %> <%= user["lastname"] %></div>
-		          		<div class="col-xs-12"><%= user["party"] %> </div>
+		          		<div class="col-xs-12"><%= candidate["Name"] %></div>
+		          		<div class="col-xs-12"><%= candidate["Party"] %> </div>
 		          		<div class="col-xs-12">
-		          			<%= form_tag("/vote", method: :post) %>
+		          			<%= form_tag("/vote/presidents", method: :post) %>
 		          				<div class="form-group">
 	          					<input type="hidden" name="longitude" id="user-long"/>
 	          					<input type="hidden" name="latitude" id="user-lat"/>
-		          				<input name="candidate" for="user[content]" type="hidden" value="<%= user["id"] <> " " <> user["lastname"]%>"/>
+		          				<input name="candidate" for="candidate[content]" type="hidden" value="<%= candidate["Name"]%>"/>
 		          				<button type="submit" class="col-xs-12 btn btn-raised btn-primary">Vote</a>
 		          				</div>
 		          			</form>

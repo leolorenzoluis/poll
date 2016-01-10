@@ -11,24 +11,23 @@ defmodule Poll.PollChannel do
   end
 
   def handle_info(:after_join, socket) do
-    IO.puts "im in handle info"
 
-    query = db("poll") 
-  	|> table("geo") 
-  	|> pluck("location") 
-  	|> map( RethinkDB.Lambda.lambda fn (record) -> record[:location] |> to_geojson end) 
-    result = run(query)
+    #query = db("poll") 
+  	#|> table("geo") 
+  	#|> pluck("location") 
+  	#|> map( RethinkDB.Lambda.lambda fn (record) -> record[:location] |> to_geojson end) 
+    #result = run(query)
     
-    Enum.each(result.data, fn message ->  push socket, "new:msg", message end)
+    #Enum.each(result.data, fn message ->  push socket, "new:msg", message end)
 
-    changes = changes(query)
-    |> run
+    #changes = changes(query)
+    #|> run
 
-    Task.async fn ->
-      Enum.each(changes, fn change ->
-        push socket, "new:msg", change["new_val"]
-      end)
-    end
+    #Task.async fn ->
+    #  Enum.each(changes, fn change ->
+    #    push socket, "new:msg", change["new_val"]
+    #  end)
+    #end
 
     {:noreply, socket}
   end
