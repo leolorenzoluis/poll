@@ -75,31 +75,8 @@ socket.connect()
         });
     }
 });*/
-var image = new ol.style.Circle({
-            radius: 5,
-            fill: null,
-            stroke: new ol.style.Stroke({color: 'red', width: 1})
-          });
 
           var styles = {
-            'Point': new ol.style.Style({
-              image: image
-            }),
-            'LineString': new ol.style.Style({
-              stroke: new ol.style.Stroke({
-                color: 'green',
-                width: 1
-              })
-            }),
-            'MultiLineString': new ol.style.Style({
-              stroke: new ol.style.Stroke({
-                color: 'green',
-                width: 1
-              })
-            }),
-            'MultiPoint': new ol.style.Style({
-              image: image
-            }),
             'MultiPolygon': new ol.style.Style({
               stroke: new ol.style.Stroke({
                 color: 'red',
@@ -107,7 +84,7 @@ var image = new ol.style.Circle({
                 width: 3
               }),
               fill: new ol.style.Fill({
-                color: 'red'
+                color: 'rgba(0,0,255,0.1)'
               })
             }),
             'Polygon': new ol.style.Style({
@@ -117,32 +94,7 @@ var image = new ol.style.Circle({
                 width: 3
               }),
               fill: new ol.style.Fill({
-                color: 'blue'
-              })
-            }),
-            'GeometryCollection': new ol.style.Style({
-              stroke: new ol.style.Stroke({
-                color: 'magenta',
-                width: 2
-              }),
-              fill: new ol.style.Fill({
-                color: 'magenta'
-              }),
-              image: new ol.style.Circle({
-                radius: 10,
-                fill: null,
-                stroke: new ol.style.Stroke({
-                  color: 'magenta'
-                })
-              })
-            }),
-            'Circle': new ol.style.Style({
-              stroke: new ol.style.Stroke({
-                color: 'red',
-                width: 2
-              }),
-              fill: new ol.style.Fill({
-                color: 'rgba(255,0,0,0.2)'
+                color: 'rgba(0,0,255,0.1)'
               })
             })
           };
@@ -189,7 +141,7 @@ $.ajax({
                 source: new ol.source.Stamen({
                     layer: 'watercolor'
                 })
-            }), 
+            }),
              /* Cluster heat map new ol.layer.Tile({
                 source: new ol.source.TileJSON({
                     url: 'http://api.tiles.mapbox.com/v3/' +
@@ -230,7 +182,7 @@ $.ajax({
     var displayFeatureInfo = function(pixel){
       info.css({
         left:pixel[0] + 'px',
-        top: (pixel[1] -15) + 'px'
+        top: (pixel[1] + 70) + 'px'
       });
       var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
         return feature;

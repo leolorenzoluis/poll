@@ -1,4 +1,4 @@
-defmodule Poll.VoteController do
+defmodule Poll.VicePresidentsController do
   use Poll.Web, :controller
   import RethinkDB.Query
 
@@ -10,7 +10,8 @@ defmodule Poll.VoteController do
       |> redirect(to: "/")
   	else
       result = db("poll") 
-      |> table("presidents") 
+      |> table("candidates") 
+      |> filter(%{Type: "Vice President"})
       |> Poll.Database.run
       
 
@@ -24,9 +25,8 @@ defmodule Poll.VoteController do
       #val = Poison.encode split
       conn 
       |> assign(:current_user, currentUser)
-      |> assign(:presidents, split)
+      |> assign(:candidates, split)
       |> render("index.html")
-      
     end
   end
 
@@ -34,6 +34,7 @@ defmodule Poll.VoteController do
     longitudeTuple = Float.parse _params["longitude"] 
     latitudeTuple = Float.parse _params["latitude"]
 
+    IO.inspect _params["longitude"] 
     long = elem(longitudeTuple,0)
     lat = elem(latitudeTuple,0)
 
@@ -47,14 +48,14 @@ defmodule Poll.VoteController do
 
     query = db("poll") 
             |> table("users")
-            |> update(%{president: _params["candidate"]})
+            |> update(%{vicepresident: _params["candidate"] })
             |> Poll.Database.run
 
 
     conn 
       |> put_flash(:info, "Successfully authenticated.")
       |> assign(:current_user, nil)
-      |> assign(:presidents, [])
+      |> assign(:candidates, [])
       |> render("index.html")
 
   end

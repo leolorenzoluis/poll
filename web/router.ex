@@ -41,7 +41,14 @@ defmodule Poll.Router do
 
     get "/", VoteController, :index
     post "/", VoteController, :create
+
+    get "/presidents", PresidentsController, :index
+    post "/presidents", PresidentsController, :create
+
+    get "/vicepresidents", VicePresidentsController, :index
+    post "/vicepresidents", VicePresidentsController, :create
   end
+
 
   # Other scopes may use custom stacks.
    scope "/api", Poll do
