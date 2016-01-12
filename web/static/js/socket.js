@@ -133,7 +133,7 @@ $.ajax({
           });
 
 
-
+          
 
     var map = new ol.Map({
         layers: [
@@ -142,7 +142,8 @@ $.ajax({
                     layer: 'watercolor'
                 })
             }),
-             /* Cluster heat map new ol.layer.Tile({
+            /*
+              Cluster heat map new ol.layer.Tile({
                 source: new ol.source.TileJSON({
                     url: 'http://api.tiles.mapbox.com/v3/' +
                         'mapbox.20110804-hoa-foodinsecurity-3month.jsonp',
@@ -159,8 +160,7 @@ $.ajax({
             new ol.layer.Tile({
                 source: new ol.source.Stamen({
                     layer: 'terrain-labels'
-                }),
-
+                })
             }),
             vectorLayer
         ],
@@ -169,7 +169,9 @@ $.ajax({
           projection:'EPSG:4326',
             center: [123.995087, 10.405683],
             //center: ol.proj.transform([123.995087, 10.405683], 'EPSG:4326', 'EPSG:3857'),
-            zoom: 7
+            zoom: 7,
+            minZoom: 6,
+            maxZoom: 9
         })
     });
 

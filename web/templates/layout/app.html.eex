@@ -53,7 +53,7 @@
       </header>
     
     <div class="container-fluid">
-      <div id="$message"></div>
+    /!--
       <div class="alert alert-dismissable alert-info">
         <button type="button" class="close" data-dismiss="alert">x</button>
       <p><%= get_flash(@conn, :info) %></p>
@@ -61,7 +61,7 @@
     <div class="alert alert-dismissable alert-danger">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <p><%= get_flash(@conn, :error) %></p>
-    </div>
+    </div>--/
 
  
       <main role="main">
