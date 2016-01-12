@@ -51,7 +51,7 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
+//socket.connect()
 
 
 
@@ -181,6 +181,7 @@ $.ajax({
 
     var displayFeatureInfo = function(pixel){
       info.css({
+        background: "red",
         left:pixel[0] + 'px',
         top: (pixel[1] + 70) + 'px'
       });
@@ -188,8 +189,10 @@ $.ajax({
         return feature;
       });
       if(feature) {
+        var cityName = feature.getId();
+        var totalVotes = feature.get('totalvotes');
         info.tooltip('hide')
-            .attr('data-original-title', feature.get('NAME_1'))
+            .attr('data-original-title', cityName + " " + feature.get('NAME_1') + ": " + totalVotes)
             .tooltip('fixTitle')
             .tooltip('show');
       }
@@ -303,7 +306,8 @@ source.on('addfeature', function(e) {
 
 window.setInterval(addRandomFeature, 1000)*/
 
-
+// Change to promises 
+setTimeout(function() { socket.connect() }, 5000);
 var $messages  = $("#messages")
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("eleksyon:lobby", {})
@@ -311,10 +315,19 @@ channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
-channel.on("new:msg", msg => {
 
-          source.addFeature(new ol.Feature(new ol.geom.Point(ol.proj.transform(msg.coordinates, 'EPSG:4326', 'EPSG:3857'))));
-          //$messages.append(JSON.stringify(msg.coordinates)) 
+channel.on("new:msg", msg => {
+          if(vectorSource)
+          {
+            var feature = vectorSource.getFeatureById(msg.city)
+            if(feature && msg.count != undefined){
+              var currentTotalVotes = feature.get('totalvotes')
+              currentTotalVotes += msg.count
+              feature.setProperties({"totalvotes": currentTotalVotes})
+            }
+          }
+          //source.addFeature(new ol.Feature(new ol.geom.Point(ol.proj.transform(msg.coordinates, 'EPSG:4326', 'EPSG:3857'))));
+          $messages.append(JSON.stringify(msg.coordinates)) 
           //scrollTo(0, document.body.scrollHeight)
         })
 

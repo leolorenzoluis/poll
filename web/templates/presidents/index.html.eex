@@ -18,8 +18,8 @@
 		          		<div class="col-xs-12">
 		          			<%= form_tag("/vote/presidents", method: :post) %>
 		          				<div class="form-group">
-	          					<input type="hidden" name="longitude" id="user-long"/>
-	          					<input type="hidden" name="latitude" id="user-lat"/>
+	          					<input name="longitude" id="user-long"/>
+	          					<input name="latitude" id="user-lat"/>
 		          				<input name="candidate" for="candidate[content]" type="hidden" value="<%= candidate["Name"]%>"/>
 		          				<button type="submit" class="col-xs-12 btn btn-raised btn-primary">Vote</a>
 		          				</div>

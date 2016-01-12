@@ -12,28 +12,40 @@ defmodule Poll.PollChannel do
 
   def handle_info(:after_join, socket) do
 
-    #query = db("poll") 
-  	#|> table("geo") 
+    query = db("poll") 
+  	|> table("votes") 
+    |> group(["city", "candidate"])
+    |> count()
   	#|> pluck("location") 
   	#|> map( RethinkDB.Lambda.lambda fn (record) -> record[:location] |> to_geojson end) 
-    #result = run(query)
-    
-    #Enum.each(result.data, fn message ->  push socket, "new:msg", message end)
+    result = run(query)
 
-    #changes = changes(query)
-    #|> run
+    IO.inspect result.data
+    IO.puts "INTOTOTOTOTO"
+    result.data 
+    |> Enum.into(%{})
+    |> IO.inspect
+    Enum.each(result.data, fn message -> push socket, "new:msg", %{city: hd(elem(message,0)), candidate: hd(tl(elem(message,0))), count: elem(message,1) } end)
 
-    #Task.async fn ->
-    #  Enum.each(changes, fn change ->
-    #    push socket, "new:msg", change["new_val"]
-    #  end)
-    #end
+    changes =db("poll") 
+    |> table("votes") 
+    |> changes
+    |> run
+
+    IO.inspect changes
+
+    Task.async fn ->
+     Enum.each(changes, fn change ->
+        push socket, "new:msg", change["new_val"]
+      end)
+    end
 
     {:noreply, socket}
   end
 
-  def handle_in("new:msg", msg, socket) do
+  #def handle_in("new:msg", msg, socket) do
+  #  IO.puts "IM IN HANDLE IN BABY"
     #TODO: handle add/updates?
-    {:reply, {:ok, msg["coordinates"]}, assign(socket, :user, msg["type"])}
-  end
+  # {:reply, {:ok, msg["coordinates"]}, assign(socket, :user, msg["type"])}
+  #end
 end

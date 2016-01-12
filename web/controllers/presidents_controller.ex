@@ -31,9 +31,11 @@ defmodule Poll.PresidentsController do
   end
 
   def create(conn, _params) do
+
+    currentUser = get_session(conn, :current_user)
     longitudeTuple = Float.parse _params["longitude"] 
     latitudeTuple = Float.parse _params["latitude"]
-
+    candidate = _params["candidate"] 
     long = elem(longitudeTuple,0)
     lat = elem(latitudeTuple,0)
 
@@ -42,20 +44,27 @@ defmodule Poll.PresidentsController do
     |> get_nearest(point({long,lat}), %{index: "Location", max_dist: 5000})
     |> Poll.Database.run
 
+    IO.puts "CREATE CREATE CREATE"
+    IO.inspect result.data
 
     currentCity = hd(result.data)["doc"]["City"]
 
-    query = db("poll") 
+    db("poll") 
             |> table("users")
-            |> update(%{president: _params["candidate"] })
+            |> update(%{president: candidate})
             |> Poll.Database.run
+
+    db("poll")
+    |> table("votes")
+    |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: "president"})
+    |> Poll.Database.run
 
 
     conn 
       |> put_flash(:info, "Successfully authenticated.")
       |> assign(:current_user, nil)
       |> assign(:candidates, [])
-      |> render("index.html")
+      |> redirect(to: "/vote/vicepresidents")
 
   end
 end
