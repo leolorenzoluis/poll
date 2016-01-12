@@ -2,8 +2,10 @@
     "type": "FeatureCollection",
     "features": [
         {
+            "id": "Abra",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -42,8 +44,10 @@
             }
         },
         {
+            "id": "Agusan del Norte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -79,8 +83,10 @@
             }
         },
         {
+            "id": "Agusan del Sur",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -128,8 +134,10 @@
             }
         },
         {
+            "id": "Aklan",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -178,8 +186,10 @@
             }
         },
         {
+            "id": "Albay",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -254,8 +264,10 @@
             }
         },
         {
+            "id": "Antique",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -314,8 +326,10 @@
             }
         },
         {
+            "id": "Apayao",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -354,8 +368,10 @@
             }
         },
         {
+            "id": "Aurora",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,                    
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -405,8 +421,10 @@
             }
         },
         {
+            "id": "Basilan",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -448,8 +466,10 @@
             }
         },
         {
+            "id": "Bataan",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -484,8 +504,10 @@
             }
         },
         {
+            "id": "Batanes",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -530,8 +552,10 @@
             }
         },
         {
+            "id": "Batangas",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -598,8 +622,10 @@
             }
         },
         {
+            "id": "Benguet",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -632,8 +658,10 @@
             }
         },
         {
+            "id": "Biliran",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -662,8 +690,10 @@
             }
         },
         {
+            "id": "Bohol",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -724,8 +754,10 @@
             }
         },
         {
+            "id": "Bukidnon",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -768,8 +800,10 @@
             }
         },
         {
+            "id": "Bulacan",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -808,8 +842,10 @@
             }
         },
         {
+            "id": "Cagayan",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -900,8 +936,10 @@
             }
         },
         {
+            "id": "Camarines Norte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -946,8 +984,10 @@
             }
         },
         {
+            "id": "Camarines Sur",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1017,8 +1057,10 @@
             }
         },
         {
+            "id": "Camiguin",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1047,8 +1089,10 @@
             }
         },
         {
+            "id": "Capiz",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1097,8 +1141,10 @@
             }
         },
         {
+            "id": "Catanduanes",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1133,8 +1179,10 @@
             }
         },
         {
+            "id": "Cavite",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1167,8 +1215,10 @@
             }
         },
         {
+            "id": "Cebu",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1249,8 +1299,10 @@
             }
         },
         {
+            "id": "Compostela Valley",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1291,8 +1343,10 @@
             }
         },
         {
+            "id": "Davao del Norte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1347,8 +1401,10 @@
             }
         },
         {
+            "id": "Davao del Sur",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1410,8 +1466,10 @@
             }
         },
         {
+            "id": "Davao Oriental",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1462,8 +1520,10 @@
             }
         },
         {
+            "id": "Dinagat Islands",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1513,8 +1573,10 @@
             }
         },
         {
+            "id": "Eastern Samar",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1590,8 +1652,10 @@
             }
         },
         {
+            "id": "Guimaras",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1622,8 +1686,10 @@
             }
         },
         {
+            "id": "Ifugaro",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1655,8 +1721,10 @@
             }
         },
         {
+            "id": "Ilocos Norte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1697,8 +1765,10 @@
             }
         },
         {
+            "id": "Ilocos Sur",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1746,8 +1816,10 @@
             }
         },
         {
+            "id": "Iloilo",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1812,8 +1884,10 @@
             }
         },
         {
+            "id": "Isabela",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1858,8 +1932,10 @@
             }
         },
         {
+            "id": "Kalinga",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1896,8 +1972,10 @@
             }
         },
         {
+            "id": "La Union",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1932,8 +2010,10 @@
             }
         },
         {
+            "id": "Laguna",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -1975,8 +2055,10 @@
             }
         },
         {
+            "id": "Lanao del Norte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2017,8 +2099,10 @@
             }
         },
         {
+            "id": "Lanao del Sur",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2058,8 +2142,10 @@
             }
         },
         {
+            "id": "Leyte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2113,8 +2199,10 @@
             }
         },
         {
+            "id": "Maguindanao",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2172,8 +2260,10 @@
             }
         },
         {
+            "id": "Marinduque",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2205,8 +2295,10 @@
             }
         },
         {
+            "id": "Masbate",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2288,8 +2380,10 @@
             }
         },
         {
+            "id": "Metro Manila",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2322,8 +2416,10 @@
             }
         },
         {
+            "id": "Misamis Occidental",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2357,8 +2453,10 @@
             }
         },
         {
+            "id": "Misamis Oriental",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2400,8 +2498,10 @@
             }
         },
         {
+            "id": "Mountain Province",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2436,8 +2536,10 @@
             }
         },
         {
+            "id": "Negros Occidental",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2484,8 +2586,10 @@
             }
         },
         {
+            "id": "Negros Oriental",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2525,8 +2629,10 @@
             }
         },
         {
+            "id": "North Cotabato",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2578,8 +2684,10 @@
             }
         },
         {
+            "id": "Northern Samar",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2639,8 +2747,10 @@
             }
         },
         {
+            "id": "Nueva Ecija",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2680,8 +2790,10 @@
             }
         },
         {
+            "id": "Nueva Vizcaya",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2721,8 +2833,10 @@
             }
         },
         {
+            "id": "Occidental Mindoro",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2792,8 +2906,10 @@
             }
         },
         {
+            "id": "Oriental Mindoro",
             "type": "Feature",
-            "properties": {
+            "properties": {    
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -2840,8 +2956,10 @@
             }
         },
         {
+            "id": "Palawan",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3097,8 +3215,10 @@
             }
         },
         {
+            "id": "Pampanga",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3137,8 +3257,10 @@
             }
         },
         {
+            "id": "Pangasinan",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3217,8 +3339,10 @@
             }
         },
         {
+            "id": "Quezon",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3345,8 +3469,10 @@
             }
         },
         {
+            "id": "Quirino",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3380,8 +3506,10 @@
             }
         },
         {
+            "id": "Rizal",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3416,8 +3544,10 @@
             }
         },
         {
+            "id": "Romblon",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3500,8 +3630,10 @@
             }
         },
         {
+            "id": "Samar",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3592,8 +3724,10 @@
             }
         },
         {
+            "id": "Sarangani",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3645,8 +3779,10 @@
             }
         },
         {
+            "id": "Siquijor",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3675,6 +3811,8 @@
             }
         },
         {
+            "id": "Sorsogon",
+            "totalvotes": 0,
             "type": "Feature",
             "properties": {
                 "ID_0": 179,
@@ -3726,8 +3864,10 @@
             }
         },
         {
+            "id": "South Cotabato",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3772,8 +3912,10 @@
             }
         },
         {
+            "id": "Southern Leyte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3817,8 +3959,10 @@
             }
         },
         {
+            "id": "Sultan Kudarat",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3867,8 +4011,10 @@
             }
         },
         {
+            "id": "Sulu",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -3971,8 +4117,10 @@
             }
         },
         {
+            "id": "Surigao del Norte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -4060,8 +4208,10 @@
             }
         },
         {
+            "id": "Surigao del Sur",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -4126,8 +4276,10 @@
             }
         },
         {
+            "id": "Tarlac",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -4164,8 +4316,10 @@
             }
         },
         {
+            "id": "Tawi-Tawi",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -4240,8 +4394,10 @@
             }
         },
         {
+            "id": "Zambales",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -4284,8 +4440,10 @@
             }
         },
         {
+            "id": "Zamboanga del Norte",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -4341,8 +4499,10 @@
             }
         },
         {
+            "id": "Zamboanga del Sur",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",
@@ -4419,8 +4579,10 @@
             }
         },
         {
+            "id": "Zamboanga Sibugay",
             "type": "Feature",
             "properties": {
+                "totalvotes": 0,
                 "ID_0": 179,
                 "ISO": "PHL",
                 "NAME_0": "Philippines",

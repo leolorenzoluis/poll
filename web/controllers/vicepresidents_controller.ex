@@ -52,11 +52,12 @@ defmodule Poll.VicePresidentsController do
             |> Poll.Database.run
 
 
+    
     conn 
       |> put_flash(:info, "Successfully authenticated.")
       |> assign(:current_user, nil)
       |> assign(:candidates, [])
-      |> render("index.html")
+      |> redirect(to: "/vote/")
 
   end
 end

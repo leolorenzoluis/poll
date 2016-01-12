@@ -1,6 +1,6 @@
 (function() { 
-var x = $("#user-lat");
-var y = $("#user-long");
+var x = $("[id=user-lat]");
+var y = $("[id=user-long]");
 
 
 function getLocation(){
@@ -14,8 +14,13 @@ function getLocation(){
 
 function showPosition(position) {
 	var  latlon = position.coords.latitude + "," + position.coords.longitude;
-	x.val(position.coords.latitude);
-	y.val(position.coords.longitude);
+	x.each(function(data) {
+		$(this).val(position.coords.latitude);
+	});
+
+	y.each(function(data) {
+		$(this).val(position.coords.longitude);
+	})
 	var img_url ="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
 	$('#mapholder').html("<img src='"+img_url+"'>");
 };
