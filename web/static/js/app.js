@@ -22,4 +22,4 @@ import socket from "./socket"
 import location from "./location"
 
 // Start material design
-$.material.init()
+//$.material.init()

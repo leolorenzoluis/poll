@@ -176,14 +176,14 @@ $.ajax({
     });
 
     var info = $('#info');
-    info.tooltip({
+    /*info.tooltip({
       animation: false,
       trigger: 'manual'
-    });
+    });*/
 
     var displayFeatureInfo = function(pixel){
       info.css({
-        background: "red",
+      //  background: "red",
         left:pixel[0] + 'px',
         top: (pixel[1] + 70) + 'px'
       });
@@ -193,19 +193,20 @@ $.ajax({
       if(feature) {
         var cityName = feature.getId();
         var totalVotes = feature.get('totalvotes');
-        info.tooltip('hide')
+        info.html(cityName + " " + feature.get('NAME_1') + ": " + totalVotes)
+        /*info.tooltip('hide')
             .attr('data-original-title', cityName + " " + feature.get('NAME_1') + ": " + totalVotes)
             .tooltip('fixTitle')
-            .tooltip('show');
+            .tooltip('show');*/
       }
       else {
-        info.tooltip('hide');
+        info.html('');
       }
     };
 
     map.on('pointermove', function(evt){
       if(evt.dragging){
-        info.tooltip('hide');
+        info.html('');
         return;
       }
       displayFeatureInfo(map.getEventPixel(evt.originalEvent));
@@ -216,7 +217,11 @@ $.ajax({
     });
 
 
-
+    /* Update Map Size */
+    var mapContainer = $('#map-container');
+    var mapTag = $('#map');
+    mapTag.css("height", mapContainer.height() + "px");
+    map.updateSize();
 
 
 
