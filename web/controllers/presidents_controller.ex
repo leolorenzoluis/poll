@@ -46,25 +46,26 @@ defmodule Poll.PresidentsController do
 
     IO.puts "CREATE CREATE CREATE"
     IO.inspect result.data
+    blah = is_list result.data
+    IO.inspect blah
+    if List.first(result.data) do
+      currentCity = hd(result.data)["doc"]["City"]
 
-    currentCity = hd(result.data)["doc"]["City"]
+      db("poll") 
+              |> table("users")
+              |> update(%{president: candidate})
+              |> Poll.Database.run
 
-    db("poll") 
-            |> table("users")
-            |> update(%{president: candidate})
-            |> Poll.Database.run
-
-    db("poll")
-    |> table("votes")
-    |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: "president"})
-    |> Poll.Database.run
-
+      db("poll")
+      |> table("votes")
+      |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: "president"})
+      |> Poll.Database.run
+    end
 
     conn 
       |> put_flash(:info, "Successfully authenticated.")
       |> assign(:current_user, nil)
       |> assign(:candidates, [])
       |> redirect(to: "/vote/vicepresidents")
-
   end
 end

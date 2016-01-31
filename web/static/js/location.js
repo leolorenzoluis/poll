@@ -21,8 +21,8 @@ function showPosition(position) {
 	y.each(function(data) {
 		$(this).val(position.coords.longitude);
 	})
-	var img_url ="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
-	$('#mapholder').html("<img src='"+img_url+"'>");
+	//var img_url ="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+	//$('#mapholder').html("<img src='"+img_url+"'>");
 };
 
 function showError(error) {

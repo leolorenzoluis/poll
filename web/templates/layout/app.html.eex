@@ -11,49 +11,81 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
     <link rel="stylesheet" href="http://openlayers.org/en/v3.12.1/css/ol.css" type="text/css">
+    
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="http://openlayers.org/en/v3.12.1/build/ol-debug.js"></script>
     <script src="https://api.mapbox.com/mapbox.js/plugins/arc.js/v0.1.0/arc.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet"s>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
-      <header class="header">
-      <div class="navbar">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">2016</a>
+    <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="demo-header mdl-layout__header mdl-color--blue-800 mdl-color-text--white-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Halalan</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search">
+              <label class="mdl-textfield__label" for="search">Enter your query...</label>
+            </div>
           </div>
-          <div class="navbar-collapse collapse navbar-inverse-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><%= link "Vote", to: vote_path(@conn, :index) %></li>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <%= if @current_user do %>
-                  <li>
-                  <img src="<%= @current_user.avatar %>" class="img-circle"/>
-                </li>
-                  <li><%= link "Logout", to: authentication_path(@conn, :delete), method: :delete, class: "btn btn-raised btn-danger" %></li>
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+            <li class="mdl-menu__item">About</li>
+            <li class="mdl-menu__item">Contact</li>
+            <li class="mdl-menu__item">Legal information</li>
+          </ul>
+        </div>
+      </header>
+
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <div class="avatar-dropdown"><%= if @current_user do %>
+
+            <div class="mdl-layout-spacer"></div>
+                  <img src="<%= @current_user.avatar %>" class="avatar"/>
+
+            <div class="mdl-layout-spacer"></div>
+                  <span>Hello <%= @current_user.name %>!</span>
               <% else %>
-              <li>
-                  <a href="/auth/facebook">
+                  <a href="/auth/facebook" class="mdl-color--blue-800 mdl-button mdl-js-button mdl-js-ripple-effect">
                     <i class="fa fa-facebook"></i>
                     Sign in with Facebook
                   </a>
-              </li>
               <% end %>
-            </ul>
+            
+            <div class="mdl-layout-spacer"></div>
+            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+              <i class="material-icons" role="presentation">arrow_drop_down</i>
+              <span class="visuallyhidden">Accounts</span>
+            </button>
           </div>
-        </div>
+        </header>
+        <nav class="navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
+          <%= link "Logout", to: authentication_path(@conn, :delete), method: :delete, class: "mdl-color-text--blue-grey-400 mdl-navigation__link" %>
+        </nav>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid content">
+          
+        <%= render @view_module, @view_template, assigns %>
+      </div>
+      </main>
     </div>
-      </header>
+      
+              
     
-    <div class="container-fluid">
-    /!--
+    
+    <script>/**
       <div class="alert alert-dismissable alert-info">
         <button type="button" class="close" data-dismiss="alert">x</button>
       <p><%= get_flash(@conn, :info) %></p>
@@ -61,12 +93,9 @@
     <div class="alert alert-dismissable alert-danger">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <p><%= get_flash(@conn, :error) %></p>
-    </div>--/
+    </div>**/</script>
 
  
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
