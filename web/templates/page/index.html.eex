@@ -18,17 +18,17 @@
     <a href="/vote">Start voting</a>
   </div>
 
-  <div class="mdl-cell--4-col mdl-cell" >
+  <div class="mdl-cell--4-col mdl-cell mdl-typography--text-center" >
 
-    <h3>Leading Presidentiables</h3>
+    <h4>Leading Presidentiables</h4>
   </div>
 
-  <div class="mdl-cell--4-col mdl-cell" >
+  <div class="mdl-cell--4-col mdl-cell mdl-typography--text-center" >
 
-    <h3>Leading Presidentiables</h3>
+    <h4>Leading Vice-Presidentiables</h4>
   </div>
-  <div class="mdl-cell--4-col mdl-cell" >
+  <div class="mdl-cell--4-col mdl-cell mdl-typography--text-center" >
 
-    <h3>Leading Presidentiables</h3>
+    <h4>Leading Senators</h4>
   </div>
 </div>
