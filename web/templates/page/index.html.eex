@@ -1,34 +1,33 @@
-<div class="mdl-cell--4-col mdl-color--white mdl-shadow--2dp mdl-cell" id="map-container" style="display:inline-block">
-
-  <div id="map" class="map" style="width:100%;height:100%"></div>
+<div class="mdl-cell mdl-cell--4-col  mdl-shadow--3dp" id="map-container" style="display:inline-block">
+  <div id="map" class="map"></div>
 </div>
-<div class="mdl-grid mdl-cell--8-col mdl-color--white mdl-shadow--2dp mdl-cell">
-
-  <div class="mdl-cell--12-col">
-    <h3>Cast your vote now!</h3>
-    <p>We are in an information age where we should no longer be poisoned by the media! </p>
-
-    <p>We are in an information age where we should no longer be poisoned by the media! </p>
-
-    <p>We are in an information age where we should no longer be poisoned by the media! </p>
-    <p>We are in an information age where we should no longer be poisoned by the media! </p>
-    <p>We are in an information age where we should no longer be poisoned by the media! </p>
-    <p>We are in an information age where we should no longer be poisoned by the media! </p>
-    <p>We are in an information age where we should no longer be poisoned by the media! </p>
-    <a href="/vote">Start voting</a>
+<div class="mdl-cell mdl-cell--8-col">
+  <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text">
+                <h2>It's time for you to be heard!</h2>
+                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
+              </div>
+              <div class="mdl-card__actions">
+                <a href="/vote" class="mdl-button">Vote now</a>
+              </div>
+            </div>
+  </section>
+  <div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col mdl-cell mdl-typography--text-center" >
+    <h4>Presidentiables</h4>
+                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
   </div>
 
-  <div class="mdl-cell--4-col mdl-cell mdl-typography--text-center" >
+  <div class="mdl-cell mdl-cell--4-col mdl-cell mdl-typography--text-center" >
 
-    <h4>Leading Presidentiables</h4>
+    <h4>Vice Presidentiables</h4>
+                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
   </div>
+  <div class="mdl-cell mdl-cell--4-col mdl-cell mdl-typography--text-center" >
 
-  <div class="mdl-cell--4-col mdl-cell mdl-typography--text-center" >
-
-    <h4>Leading Vice-Presidentiables</h4>
+    <h4>Senators</h4>
+                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
   </div>
-  <div class="mdl-cell--4-col mdl-cell mdl-typography--text-center" >
-
-    <h4>Leading Senators</h4>
   </div>
 </div>
