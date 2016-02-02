@@ -2,6 +2,7 @@ defmodule Poll.PresidentsController do
   use Poll.Web, :controller
   import RethinkDB.Query
   import Poll.VoteRepository
+  import Poll.CandidatesRepository
 
   def index(conn, _params) do
     currentUser = get_session(conn, :current_user)
@@ -10,10 +11,7 @@ defmodule Poll.PresidentsController do
       |> put_flash(:error, "You must sign in to your Facebook account in order to vote.")
       |> redirect(to: "/")
   	else
-      result = db("poll") 
-      |> table("candidates") 
-      |> filter(%{Type: "President"})
-      |> Poll.Database.run
+      result = get_all_candidates_by_position("President")
       
       conn 
       |> assign(:current_user, currentUser)
@@ -23,10 +21,9 @@ defmodule Poll.PresidentsController do
   end
 
   def create(conn, _params) do
-    IO.inspect _params["test"]
 
     currentUser = get_session(conn, :current_user)
-    create_vote(currentUser, _params)
+    create_vote(currentUser, _params, "President")
    
     conn 
       |> put_flash(:info, "Successfully authenticated.")
