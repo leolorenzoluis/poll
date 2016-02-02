@@ -1,38 +1,23 @@
-<div class="col-sm-4">
+<div class="mdl-cell mdl-cell--4-col">
 	<h1>Vice Presidents</h1>
 	<p>
 		The head of state and head of government of the Philippines. The President leads the executive branch of the Philippines
 	</p>
 </div>
-<div class="well col-sm-8">
-	<%= for chunk <- @candidates do %>
-	<div class="row">
-	    <div class="row-height">
-			<%= for candidate <- chunk do %>
-			<%= if not is_nil(candidate) do %>
-	    	<div class="col-sm-6 col-sm-height">
-	        	<div class="inside ">
-	          		<div class="content col-xs-12">
-		          		<div class="col-xs-12"><%= candidate["Name"] %></div>
-		          		<div class="col-xs-12"><%= candidate["Party"] %> </div>
-		          		<div class="col-xs-12">
-		          			<%= form_tag("/vote/vicepresidents", method: :post) %>
-		          				<div class="form-group">
-	          					<input type="hidden" name="longitude" id="user-long"/>
-	          					<input type="hidden" name="latitude" id="user-lat"/>
-		          				<input name="candidate" for="candidate[content]" type="hidden" value="<%= candidate["Name"]%>"/>
-		          				<button type="submit" class="col-xs-12 btn btn-raised btn-primary">Vote</a>
-		          				</div>
-		          			</form>
-	          			</div>
-			        </div>
-		        </div>
-      		</div>
-      		<% else %>
-      		<div class="col-sm-6 col-sm-height">
-      		</div>
-			<% end %>
-			<% end %>
+<div class="mdl-cell mdl-cell--8-col  mdl-shadow--3dp mdl-color--white mdl-grid">
+	<%= for candidate <- @candidates do %>
+	<div class="mdl-cell mdl-cell--4-col ">
+  		<div class="mdl-cell mdl-cell--12-col"><%= candidate["Name"] %></div>
+  		<div class="mdl-cell mdl-cell--12-col"><%= candidate["Party"] %> </div>
+  		<div class="mdl-cell mdl-cell--12-col">
+		<%= form_tag("/vote/vicepresidents", method: :post) %>
+			<div class="form-group">
+			<input name="longitude" id="user-long"/>
+			<input name="latitude" id="user-lat"/>
+			<input name="candidate" for="candidate[content]" type="hidden" value="<%= candidate["Name"]%>"/>
+			<button type="submit" class="mdl-button">Vote</a>
+			</div>
+		</form>
 		</div>   
   	</div>
 	<% end %>
