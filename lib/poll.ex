@@ -28,6 +28,3 @@ defmodule Poll do
   end
 end
 
-defmodule Poll.Database do
-  use RethinkDB.Connection
-end
