@@ -1,6 +1,7 @@
 defmodule Poll.VicePresidentsController do
   use Poll.Web, :controller
   import RethinkDB.Query
+  import Poll.CandidatesRepository
 
   def index(conn, _params) do
     currentUser = get_session(conn, :current_user)
@@ -9,23 +10,11 @@ defmodule Poll.VicePresidentsController do
       |> put_flash(:error, "You must sign in to your Facebook account in order to vote.")
       |> redirect(to: "/")
   	else
-      result = db("poll") 
-      |> table("candidates") 
-      |> filter(%{Type: "Vice President"})
-      |> Poll.Database.run
-      
+      result = get_all_candidates_by_position("Vice President")
 
-      split = Enum.chunk(result.data, 3,3,[nil,nil,nil])
-
-      Enum.each(split, fn (x) -> Enum.each(x, fn (y) -> IO.inspect y["firstname"] end) end)
-
-      test =hd (hd(split))
-      #IO.inspect test
-      #IO.inspect test["firstname"]
-      #val = Poison.encode split
       conn 
       |> assign(:current_user, currentUser)
-      |> assign(:candidates, split)
+      |> assign(:candidates, result)
       |> render("index.html")
     end
   end
@@ -38,6 +27,8 @@ defmodule Poll.VicePresidentsController do
     IO.inspect _params["longitude"] 
     long = elem(longitudeTuple,0)
     lat = elem(latitudeTuple,0)
+    IO.puts "HIII IM IN CREATE"
+    IO.inspect point({long,lat})
 
     result = db("poll") 
     |> table("cities") 

@@ -2,42 +2,58 @@ defmodule Poll.VoteRepository do
 	import Poll.Database
   	import RethinkDB.Query
 
-	def create_vote(currentUser, params) do
+	def create_vote(currentUser, params, position) do
 
     candidate = params["candidate"] 
-    long = get_value(params,"longitude")
-    lat = get_value(params,"latitude")
+    currentCity = get_position(params)
+    |> create_rethink_point
+    |> get_nearest_city
 
-    result = db("poll") 
-    |> table("cities") 
-    |> get_nearest(point({long,lat}), %{index: "Location", max_dist: 5000})
-    |> run
-
-    if List.first(result.data) do
-      currentCity = hd(result.data)["doc"]["City"]
-
+    if currentCity do
       db("poll") 
       |> table("users")
       |> update(%{president: candidate})
       |> run
 
-      db("poll")
-      |> table("votes")
-      |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: "president"})
-      |> run
+      insert_vote(currentCity, currentUser, candidate, position)
     end
-
 	end
 
-	def get_value(params, key) do
+	defp create_rethink_point(position) do
+		point({position[:longitude],position[:latitude]})
+	end
+
+	defp get_nearest_city(point) do
+		result = db("poll") 
+	    |> table("cities") 
+	    |> get_nearest(point, %{index: "Location", max_dist: 5000})
+	    |> run
+
+	    IO.inspect "RESULT IS" 
+	    IO.inspect result
+	    if List.first(result.data) do
+      		currentCity = hd(result.data)["doc"]["City"]
+      	end
+	end
+
+	defp get_position(params) do
+
+	    long = get_value(params,"longitude")
+	    lat = get_value(params,"latitude")
+		%{longitude: long, latitude: lat}
+	end
+
+
+
+	defp get_value(params, key) do
 		valueTuple = Float.parse params[key] 
     	value = elem(valueTuple,0)
 	end
 
-	def update_vote(currentCity,currentUser,candidate) do
+	def insert_vote(currentCity,currentUser,candidate, position) do
  		db("poll")
 	    |> table("votes")
-	    |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: "president"})
+	    |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: position})
 	    |> run
 	end
 end
