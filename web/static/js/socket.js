@@ -79,9 +79,8 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
           var styles = {
             'MultiPolygon': new ol.style.Style({
               stroke: new ol.style.Stroke({
-                color: 'red',
-                lineDash: [4],
-                width: 3
+                color: 'black',
+                width: 2
               }),
               fill: new ol.style.Fill({
                 color: 'rgba(0,0,255,0.1)'
@@ -89,9 +88,8 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
             }),
             'Polygon': new ol.style.Style({
               stroke: new ol.style.Stroke({
-                color: 'blue',
-                lineDash: [4],
-                width: 3
+                color: 'black',
+                width: 2
               }),
               fill: new ol.style.Fill({
                 color: 'rgba(0,0,255,0.1)'
