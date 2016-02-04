@@ -2,7 +2,7 @@ defmodule Poll.VoteRepository do
 	import Poll.Database
   	import RethinkDB.Query
 
-	def create_vote(currentUser, params, position) do
+	def create_vote(currentUser, params, positionType) do
 	    candidate = params["candidate"] 
 	    currentCity = get_position(params)
 	    |> create_rethink_point
@@ -17,7 +17,7 @@ defmodule Poll.VoteRepository do
 	      |> update(%{president: candidate})
 	      |> run
 
-	      insert_vote(currentCity, currentUser, candidate, position)
+	      insert_vote(currentCity, currentUser, candidate, positionType)
 	    end
 	end
 
@@ -34,7 +34,7 @@ defmodule Poll.VoteRepository do
 	defp get_nearest_city(point) do
 		result = db("poll") 
 	    |> table("cities") 
-	    |> get_nearest(point, %{index: "Location", max_dist: 50, unit: "mi"})
+	    |> get_nearest(point, %{index: "Location", max_dist: 100, unit: "mi"})
 	    |> run
 
 	    IO.inspect "RESULT IS" 
@@ -49,10 +49,10 @@ defmodule Poll.VoteRepository do
     	value = elem(valueTuple,0)
 	end
 
-	def insert_vote(currentCity,currentUser,candidate, position) do
+	def insert_vote(currentCity,currentUser,candidate, positionType) do
  		db("poll")
 	    |> table("votes")
-	    |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: position})
+	    |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: positionType})
 	    |> run
 	end
 end
