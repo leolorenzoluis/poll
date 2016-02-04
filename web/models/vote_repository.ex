@@ -3,20 +3,28 @@ defmodule Poll.VoteRepository do
   	import RethinkDB.Query
 
 	def create_vote(currentUser, params, position) do
+	    candidate = params["candidate"] 
+	    currentCity = get_position(params)
+	    |> create_rethink_point
+	    |> get_nearest_city
 
-    candidate = params["candidate"] 
-    currentCity = get_position(params)
-    |> create_rethink_point
-    |> get_nearest_city
+    	IO.puts "current city is" 
+    	IO.inspect currentCity
 
-    if currentCity do
-      db("poll") 
-      |> table("users")
-      |> update(%{president: candidate})
-      |> run
+	    if currentCity do
+	      db("poll") 
+	      |> table("users")
+	      |> update(%{president: candidate})
+	      |> run
 
-      insert_vote(currentCity, currentUser, candidate, position)
-    end
+	      insert_vote(currentCity, currentUser, candidate, position)
+	    end
+	end
+
+	defp get_position(params) do
+	    long = get_value(params,"longitude")
+	    lat = get_value(params,"latitude")
+		%{longitude: long, latitude: lat}
 	end
 
 	defp create_rethink_point(position) do
@@ -26,7 +34,7 @@ defmodule Poll.VoteRepository do
 	defp get_nearest_city(point) do
 		result = db("poll") 
 	    |> table("cities") 
-	    |> get_nearest(point, %{index: "Location", max_dist: 5000})
+	    |> get_nearest(point, %{index: "Location", max_dist: 50, unit: "mi"})
 	    |> run
 
 	    IO.inspect "RESULT IS" 
@@ -35,15 +43,6 @@ defmodule Poll.VoteRepository do
       		currentCity = hd(result.data)["doc"]["City"]
       	end
 	end
-
-	defp get_position(params) do
-
-	    long = get_value(params,"longitude")
-	    lat = get_value(params,"latitude")
-		%{longitude: long, latitude: lat}
-	end
-
-
 
 	defp get_value(params, key) do
 		valueTuple = Float.parse params[key] 
