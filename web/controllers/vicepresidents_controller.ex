@@ -1,6 +1,7 @@
 defmodule Poll.VicePresidentsController do
   use Poll.Web, :controller
   import RethinkDB.Query
+  import Poll.VoteRepository
   import Poll.CandidatesRepository
 
   def index(conn, _params) do
@@ -20,33 +21,9 @@ defmodule Poll.VicePresidentsController do
   end
 
   def create(conn, _params) do
+    
     currentUser = get_session(conn, :current_user)
-    longitudeTuple = Float.parse _params["longitude"] 
-    latitudeTuple = Float.parse _params["latitude"]
-
-    IO.inspect _params["longitude"] 
-    long = elem(longitudeTuple,0)
-    lat = elem(latitudeTuple,0)
-    IO.puts "HIII IM IN CREATE"
-    IO.inspect point({long,lat})
-
-    result = db("poll") 
-    |> table("cities") 
-    |> get_nearest(point({long,lat}), %{index: "Location", max_dist: 5000})
-    |> Poll.Database.run
-    candidate = _params["candidate"]
-
-    currentCity = hd(result.data)["doc"]["City"]
-
-    query = db("poll") 
-            |> table("users")
-            |> update(%{vicepresident: candidate })
-            |> Poll.Database.run
-
-    db("poll")
-      |> table("votes")
-      |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: "vice-president"})
-      |> Poll.Database.run
+    create_vote(currentUser, _params, "Vice-President")
     
     conn 
       |> put_flash(:info, "Successfully authenticated.")
