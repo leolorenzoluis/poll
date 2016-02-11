@@ -31,7 +31,7 @@ defmodule Poll.Mixfile do
     [{:phoenix, "~> 1.1.0"},
      {:phoenix_html, "~> 2.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:rethinkdb, "~> 0.2.2"},
+     {:rethinkdb, "~> 0.3.2"},
      {:gettext, "~> 0.9"},
      {:ueberauth, "~> 0.2"},
      {:ueberauth_facebook, "~>0.2"},

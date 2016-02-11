@@ -1,9 +1,31 @@
 defmodule Poll.VoteRepository do
 	import Poll.Database
   	import RethinkDB.Query
+  	alias RethinkDB.Record
+  	require RethinkDB.Lambda
+  	import RethinkDB.Lambda
+
+  	def get_all() do
+
+  		result = db("poll") 
+			  	|> table("cities") 
+			  	|> pluck("City")
+			  	|> order_by(desc("City"))
+			    |> run
+
+		IO.inspect result.data
+		Enum.each(result.data, fn x -> 
+			validCity = String.replace(x["City"], " ","")
+			IO.inspect validCity
+			result = db("poll") |> table_create(validCity) |> run 
+			IO.inspect result
+		end)
+
+  	end
 
 	def create_vote(currentUser, params, positionType) do
 	    candidate = params["candidate"] 
+
 	    currentCity = get_position(params)
 	    |> create_rethink_point
 	    |> get_nearest_city
@@ -11,13 +33,13 @@ defmodule Poll.VoteRepository do
     	IO.puts "current city is" 
     	IO.inspect currentCity
 
-	    if currentCity do
+	    if {:ok, currentCity} do
 	      db("poll") 
 	      |> table("users")
 	      |> update(%{president: candidate})
 	      |> run
 
-	      insert_vote(currentCity, currentUser, candidate, positionType)
+	      insert_vote(currentCity, currentUser, candidate, positionType,1)
 	    end
 	end
 
@@ -31,17 +53,21 @@ defmodule Poll.VoteRepository do
 		point({position[:longitude],position[:latitude]})
 	end
 
-	defp get_nearest_city(point) do
+	def get_nearest_city(point) do
 		result = db("poll") 
 	    |> table("cities") 
 	    |> get_nearest(point, %{index: "Location", max_dist: 100, unit: "mi"})
 	    |> run
 
-	    IO.inspect "RESULT IS" 
-	    IO.inspect result
-	    if List.first(result.data) do
-      		currentCity = hd(result.data)["doc"]["City"]
-      	end
+	    case result do
+	    	%RethinkDB.Record{} -> if List.first(result.data) do
+      								{:ok, hd(result.data)["doc"]["City"]} #Get the nearest which is the first one
+								   else 
+									{:ok, result.data}
+      							   end
+	    	%RethinkDB.Response{} -> {:error, result.data["r"]}
+	    	%RethinkDB.Feed{} -> raise "not implemented"
+	    end
 	end
 
 	defp get_value(params, key) do
@@ -49,10 +75,18 @@ defmodule Poll.VoteRepository do
     	value = elem(valueTuple,0)
 	end
 
-	def insert_vote(currentCity,currentUser,candidate, positionType) do
+	def insert_vote(currentCity,currentUser,candidate, positionType, n) when n<= 1 do
+		IO.puts " HELLO WORLD "
+		
+		validCity = String.replace(currentCity, " ","")
  		db("poll")
-	    |> table("votes")
-	    |> insert(%{city: currentCity, userid: currentUser.id, candidate: candidate, position: positionType})
+	    |> table(validCity)
+	    |> insert(%{userid: currentUser.id, candidate: candidate, position: positionType})
 	    |> run
+	end
+
+	def insert_vote(currentCity,currentUser,candidate, positionType, n) do
+		insert_vote(currentCity,currentUser,candidate, positionType, n-1)
+		insert_vote(currentCity,currentUser,candidate, positionType, n-1)
 	end
 end

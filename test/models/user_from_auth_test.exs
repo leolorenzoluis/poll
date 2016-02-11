@@ -14,6 +14,7 @@ defmodule Poll.UserFromAuthTest do
 		table_create(@table_name) |> run
 		on_exit fn -> 
 			start_link
+			table_drop(@table_name) |> run
 		end
 		:ok
 	end
