@@ -4,7 +4,7 @@ defmodule Poll.VoteRepositoryTest do
 	import Poll.VoteRepository
 	import Poll.Database
 	#TODO: Uhh.. get to know more on testing?
-	@table_name "testUsers"
+	@table_name "wat"
 
 	setup_all do
 		start_link
