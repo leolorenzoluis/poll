@@ -8,18 +8,15 @@ defmodule Poll.VoteRepository do
   	def get_all() do
 
   		result = db("poll") 
-			  	|> table("cities") 
-			  	|> pluck("City")
-			  	|> order_by(desc("City"))
+			  	|> table("ZamboangaSibugay") 
 			    |> run
 
-		IO.inspect result.data
-		Enum.each(result.data, fn x -> 
-			validCity = String.replace(x["City"], " ","")
-			IO.inspect validCity
-			result = db("poll") |> table_create(validCity) |> run 
-			IO.inspect result
-		end)
+		#Enum.each(result.data, fn x -> 
+	#		validCity = String.replace(x["City"], " ","")
+	#		IO.inspect validCity
+	#		result = db("poll") |> table_create(validCity) |> run 
+	#		IO.inspect result
+	#	end)
 
   	end
 
@@ -59,7 +56,6 @@ defmodule Poll.VoteRepository do
 	    |> table("cities") 
 	    |> get_nearest(point, %{index: "Location", max_dist: 100, unit: "mi"})
 	    |> run
-
 	    case result do
 	    	%RethinkDB.Record{} -> if List.first(result.data) do
       								{:ok, hd(result.data)["doc"]["City"]} #Get the nearest which is the first one
@@ -67,7 +63,6 @@ defmodule Poll.VoteRepository do
 									{:ok, result.data}
       							   end
 	    	%RethinkDB.Response{} -> {:error, result.data["r"]}
-	    	%RethinkDB.Feed{} -> raise "not implemented"
 	    end
 	end
 

@@ -4,7 +4,7 @@ defmodule Poll.VoteRepositoryTest do
 	import Poll.VoteRepository
 	import Poll.Database
 	#TODO: Uhh.. get to know more on testing?
-	@table_name "wat"
+	@table_name "ZamboangaSibugay"
 
 	setup_all do
 		start_link
@@ -39,5 +39,31 @@ defmodule Poll.VoteRepositoryTest do
 		value = point(0,0) 
 		measure = get_nearest_city(value)
 		assert measure == {:ok, []}
+	end
+
+	test "changefeed process" do
+		q = table(@table_name) |> changes
+		changes =  run(q)
+		t = Task.async fn ->
+			RethinkDB.Connection.next(changes)
+		end
+
+		data = %{"test" => "data"}
+		q = table(@table_name) |> insert(data)
+		res = run(q)
+		expected = res.data["id"]
+		changes = Task.await(t)
+		^expected = changes.data |> hd |> Map.get("id")
+
+		#test enumerable
+		t = Task.async fn ->
+			changes |> Enum.take(5)
+		end
+		1..6 |> Enum.each(fn _ ->
+			q = table(@table_name) |> insert(data)
+			run(q)
+		end)
+		data = Task.await(t)
+		5 = Enum.count(data)
 	end
 end
