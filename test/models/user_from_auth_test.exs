@@ -1,6 +1,5 @@
 defmodule Poll.UserFromAuthTest do
 	alias Ueberauth.Auth
-	alias Ueberauth.Info
 	import RethinkDB.Query
 	use ExUnit.Case, async: true
 	import Poll.UserFromAuth

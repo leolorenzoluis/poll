@@ -13,29 +13,33 @@ defmodule Poll.PollChannel do
   def handle_info(:after_join, socket) do
 
     query = db("poll") 
-  	|> table("votes") 
-    |> group(["city", "candidate"])
-    |> count()
+  	|> table("ZamboangaSibugay") 
   	#|> pluck("location") 
   	#|> map( RethinkDB.Lambda.lambda fn (record) -> record[:location] |> to_geojson end) 
     result = run(query)
 
-    IO.inspect result.data
-    IO.puts "INTOTOTOTOTO"
-    result.data 
-    |> Enum.into(%{})
-    |> IO.inspect
-    Enum.each(result.data, fn message -> push socket, "new:msg", %{city: hd(elem(message,0)), candidate: hd(tl(elem(message,0))), count: elem(message,1) } end)
+
+    IO.puts "Inspecting result in poll channel"
+    IO.inspect result
+    #result.data 
+    #|> Enum.into(%{})
+    #|> IO.inspect
+    #Enum.each(result.data, fn message -> push socket, "new:msg", %{city: hd(elem(message,0)), candidate: hd(tl(elem(message,0))), count: elem(message,1) } end)
+    Enum.each(result.data, fn message -> push socket, "new:msg", %{candidate: "hello" } end)
 
     changes =db("poll") 
-    |> table("votes") 
+    |> table("ZamboangaSibugay") 
     |> changes
     |> run
 
+
+    IO.puts "Inspecting changes  in info poll channel"
     IO.inspect changes
 
     Task.async fn ->
      Enum.each(changes, fn change ->
+        IO.puts "================== HELLO IM IN A CHANGE"
+        IO.inspect changes
         push socket, "new:msg", change["new_val"]
       end)
     end
