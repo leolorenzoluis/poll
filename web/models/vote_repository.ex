@@ -37,7 +37,7 @@ defmodule Poll.VoteRepository do
 						      |> update(%{president: candidate})
 						      |> run
 
-						      insert_vote(value, currentUser, candidate, positionType,1)
+						      insert_vote(value, currentUser, candidate, positionType,50)
     	end
 	end
 
@@ -73,12 +73,27 @@ defmodule Poll.VoteRepository do
 
 	def insert_vote(currentCity,currentUser,candidate, positionType, n) when n<= 1 do
 		IO.puts " HELLO WORLD "
-		IO.inspect currentCity
+		IO.inspect candidate
 		
 		validCity = String.replace(currentCity, " ","")
  		db("poll")
 	    |> table(validCity)
 	    |> insert(%{userid: currentUser.id, candidate: candidate, position: positionType})
+	    |> run
+
+
+	    record = db("poll")
+	    |> table("votes")
+	    |> get(candidate)
+	    |> run
+
+	    totalVotes = record.data["TotalVotes"]
+    	IO.inspect "=====TOTAL VOTES IS======="
+	    IO.inspect totalVotes
+	    db("poll")
+	    |> table("votes")
+	    |> get(candidate)
+	    |> update(%{TotalVotes: totalVotes + 1})
 	    |> run
 	end
 
