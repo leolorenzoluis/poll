@@ -64,6 +64,7 @@ defmodule Poll.VoteRepositoryTest do
 			run(q)
 		end)
 		data = Task.await(t)
+		IO.inspect data
 		5 = Enum.count(data)
 	end
 end
