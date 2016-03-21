@@ -25,7 +25,7 @@ defmodule Poll.PollChannel do
     #|> Enum.into(%{})
     #|> IO.inspect
     #Enum.each(result.data, fn message -> push socket, "new:msg", %{city: hd(elem(message,0)), candidate: hd(tl(elem(message,0))), count: elem(message,1) } end)
-    #Enum.each(result.data, fn message -> push socket, "new:msg", %{candidate: "hello" } end)
+    Enum.each(result.data, fn message -> push socket, "new:msg", message end)
 
     changes =db("poll") 
     |> table("votes") 

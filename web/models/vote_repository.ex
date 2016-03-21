@@ -37,7 +37,7 @@ defmodule Poll.VoteRepository do
 						      |> update(%{president: candidate})
 						      |> run
 
-						      insert_vote(value, currentUser, candidate, positionType,50)
+						      insert_vote(value, currentUser, candidate, positionType,2)
     	end
 	end
 
