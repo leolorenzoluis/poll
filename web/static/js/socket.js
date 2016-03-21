@@ -322,17 +322,21 @@ channel.join()
 
 
 channel.on("new:msg", msg => {
-          if(vectorSource)
-          {
-            var feature = vectorSource.getFeatureById(msg.city)
-            if(feature && msg.count != undefined){
-              var currentTotalVotes = feature.get('totalvotes')
-              currentTotalVotes += msg.count
-              feature.setProperties({"totalvotes": currentTotalVotes})
-            }
-          }
+          var candidatePlaceholder = $("div[id='"+msg["id"]+"']")
+          candidatePlaceholder.empty()
+          candidatePlaceholder.append(msg["TotalVotes"])
+          //$messages.append(JSON.stringify(msg))
+          //if(vectorSource)
+          //{
+          //  var feature = vectorSource.getFeatureById(msg.city)
+          //  if(feature && msg.count != undefined){
+           //   var currentTotalVotes = feature.get('totalvotes')
+           //   currentTotalVotes += msg.count
+            //  feature.setProperties({"totalvotes": currentTotalVotes})
+          //  }
+          //}
           //source.addFeature(new ol.Feature(new ol.geom.Point(ol.proj.transform(msg.coordinates, 'EPSG:4326', 'EPSG:3857'))));
-          $messages.append(JSON.stringify(msg.coordinates)) 
+          //$messages.append(JSON.stringify(msg.coordinates)) 
           //scrollTo(0, document.body.scrollHeight)
         })
 
