@@ -1,29 +1,3 @@
-<div class="mdl-cell mdl-cell--4-col  mdl-shadow--3dp" id="map-container" style="display:inline-block">
-  <div id="map" class="map"></div>
-</div>
-<div class="mdl-cell mdl-cell--8-col">
-  <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
-            <div class="mdl-card mdl-cell mdl-cell--12-col">
-              <div class="mdl-card__supporting-text">
-                <h2>Democracy has risen!</h2>
-                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
-              </div>
-              <div class="mdl-card__actions">
-                <a href="/vote" class="mdl-button">Vote now</a>
-              </div>
-            </div>
-  </section>
-  <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center" >
-    <h4>Presidentiables</h4>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge1" onclick="gauge1.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge2" onclick="gauge2.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge3" onclick="gauge3.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge4" onclick="gauge4.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge5" onclick="gauge5.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge6" onclick="gauge6.update(NewValue());"></svg>
-</div>
-<script language="JavaScript">
 /*!
  * @license Open source under BSD 2-clause (http://choosealicense.com/licenses/bsd-2-clause/)
  * Copyright (c) 2015, Curtis Bratton
@@ -48,7 +22,7 @@ function liquidFillGaugeDefaultSettings(){
         waveColor: "#178BCA", // The color of the fill wave.
         waveOffset: 0, // The amount to initially offset the wave. 0 = no offset. 1 = offset of one full wave.
         textVertPosition: .5, // The height at which to display the percentage text withing the wave circle. 0 = bottom, 1 = top.
-        textSize: 0.8, // The relative height of the text to display in the wave circle. 1 = 50%
+        textSize: 1, // The relative height of the text to display in the wave circle. 1 = 50%
         valueCountUp: true, // If true, the displayed value counts up from 0 to it's final value upon loading. If false, the final value is displayed.
         displayPercent: true, // If true, a % symbol is displayed after the value.
         textColor: "#045681", // The color of the value text when the wave does not overlap it.
@@ -61,10 +35,8 @@ function loadLiquidFillGauge(elementId, value, config) {
 
     var gauge = d3.select("#" + elementId);
     var radius = Math.min(parseInt(gauge.style("width")), parseInt(gauge.style("height")))/2;
-    var locationX = 0;
-    var locationY = 0;
-    //var locationX = parseInt(gauge.style("width"))/2 - radius;
-    //var locationY = parseInt(gauge.style("height"))/2 - radius;
+    var locationX = parseInt(gauge.style("width"))/2 - radius;
+    var locationY = parseInt(gauge.style("height"))/2 - radius;
     var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value))/config.maxValue;
 
     var waveHeightScale;
@@ -294,64 +266,3 @@ function loadLiquidFillGauge(elementId, value, config) {
 
     return new GaugeUpdater();
 }
-
-    var gaugeSettings = liquidFillGaugeDefaultSettings();
-    gaugeSettings.circleColor = "#FFEB3B";
-    gaugeSettings.textColor = "rgba(0,0,0,0.52)";
-    gaugeSettings.waveTextColor = "rgba(0,0,0,0.52)";
-    gaugeSettings.waveColor = "#FFEB3B";
-    gaugeSettings.circleThickness = 0.1;
-    gaugeSettings.circleFillGap = 0.2;
-    gaugeSettings.textVertPosition = 0.5;
-    gaugeSettings.waveAnimateTime = 2000;
-    gaugeSettings.waveHeight = 0.3;
-    gaugeSettings.waveCount = 1;
-    gaugeSettings.displayPercent = false;
-    gaugeSettings.maxValue = 85000;
-
-    var roxasGauge = loadLiquidFillGauge("fillgauge1", 0, gaugeSettings);
-    gaugeSettings.circleColor = "#ff9800";
-    gaugeSettings.waveColor = "#ff9800";
-    var binayGauge = loadLiquidFillGauge("fillgauge2", 0, gaugeSettings);
-    gaugeSettings.circleColor = "#f44336";
-    gaugeSettings.waveColor = "#f44336";
-    var santiagoGauge = loadLiquidFillGauge("fillgauge3", 0, gaugeSettings);
-    gaugeSettings.circleColor = "#4caf50";
-    gaugeSettings.waveColor = "#4caf50";
-    var poeGauge = loadLiquidFillGauge("fillgauge4", 0, gaugeSettings);
-    gaugeSettings.circleColor = "#2196f3";
-    gaugeSettings.waveColor = "#2196f3";
-    var duterteGauge = loadLiquidFillGauge("fillgauge5", 0, gaugeSettings);
-   
-
-    function NewValue(){
-        if(Math.random() > .5){
-            return 1000000;
-        } else {
-            return (Math.random()*100).toFixed(1);
-        }
-    }
-</script>
-
-    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-left">Jejomar Cabauatan Binay<div id="Jejomar Cabauatan Binay"></div></div>
-    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-left">Rodrigo Duterte<div id="Rodrigo Duterte"></div></div>
-    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-left">Miriam Defensor Santiago<div id="Miriam Defensor Santiago"></div></div>
-    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-left">Camilo Sabio<div id="Camilo Sabio"></div></div>
-    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-left">Roy Seneres<div id="Roy Seneres"></div></div>
-    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-left">Grace Poe<div id="Grace Poe"></div></div>
-    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-left">Mar Roxas<div id="Mar Roxas"></div></div>
-                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
-  </div>
-
-  <div class="mdl-cell mdl-cell--4-col mdl-cell mdl-typography--text-center" >
-
-    <h4>Yadado</h4>
-                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
-  </div>
-  <div class="mdl-cell mdl-cell--4-col mdl-cell mdl-typography--text-center" >
-
-    <h4>Yadada</h4>
-                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
-  </div>
-  </div>
-</div>
