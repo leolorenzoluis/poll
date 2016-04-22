@@ -13,15 +13,65 @@
               </div>
             </div>
   </section>
-  <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center" >
-    <h4>Presidentiables</h4>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge1" onclick="gauge1.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge2" onclick="gauge2.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge3" onclick="gauge3.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge4" onclick="gauge4.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge5" onclick="gauge5.update(NewValue());"></svg>
-        <svg  class="mdl-cell mdl-cell--2-col" id="fillgauge6" onclick="gauge6.update(NewValue());"></svg>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center" >
+        <h3>Presidentiables</h3>
+        <div class="mdl-grid">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="roxas-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Mar Roxas</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="binay-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Jejomar Cabauatan Binay</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="santiago-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Miriam Defensor Santiago</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="poe-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Grace Poe</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="duterte-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Rodrigo Duterte</h6>
+            </div>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+    </div>
+</div>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center" >
+        <h3>Vice Presidentiables</h3>
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="robredo-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Leni Robredo</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="honasan-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Gringo Honasan</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="marcos-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Bongbong Marcos</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="escudero-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Chiz Escudero</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="cayetano-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Alan Cayetano</h6>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col mdl-typography--text-center" >
+                <svg class="mdl-cell mdl-cell--12-col" id="trillanes-gauge"></svg>
+                <h6 class="mdl-cell mdl-cell--12-col">Antonio Trillanes</h6>
+            </div>
+        </div>
+    </div>
 </div>
 <script language="JavaScript">
 /*!
@@ -61,10 +111,10 @@ function loadLiquidFillGauge(elementId, value, config) {
 
     var gauge = d3.select("#" + elementId);
     var radius = Math.min(parseInt(gauge.style("width")), parseInt(gauge.style("height")))/2;
-    var locationX = 0;
-    var locationY = 0;
-    //var locationX = parseInt(gauge.style("width"))/2 - radius;
-    //var locationY = parseInt(gauge.style("height"))/2 - radius;
+    //var locationX = 0;
+    //var locationY = 0;
+    var locationX = parseInt(gauge.style("width"))/2 - radius;
+    var locationY = parseInt(gauge.style("height"))/2 - radius;
     var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value))/config.maxValue;
 
     var waveHeightScale;
@@ -309,20 +359,28 @@ function loadLiquidFillGauge(elementId, value, config) {
     gaugeSettings.displayPercent = false;
     gaugeSettings.maxValue = 85000;
 
-    var roxasGauge = loadLiquidFillGauge("fillgauge1", 0, gaugeSettings);
+    var roxasGauge = loadLiquidFillGauge("roxas-gauge", 0, gaugeSettings);
+    var robredoGauge = loadLiquidFillGauge("robredo-gauge", 0, gaugeSettings);
     gaugeSettings.circleColor = "#ff9800";
     gaugeSettings.waveColor = "#ff9800";
-    var binayGauge = loadLiquidFillGauge("fillgauge2", 0, gaugeSettings);
+
+    var binayGauge = loadLiquidFillGauge("binay-gauge", 0, gaugeSettings);
+    var honasanGauge = loadLiquidFillGauge("honasan-gauge", 0, gaugeSettings);
     gaugeSettings.circleColor = "#f44336";
     gaugeSettings.waveColor = "#f44336";
-    var santiagoGauge = loadLiquidFillGauge("fillgauge3", 0, gaugeSettings);
+    var santiagoGauge = loadLiquidFillGauge("santiago-gauge", 0, gaugeSettings);
+    var marcosGauge = loadLiquidFillGauge("marcos-gauge", 0, gaugeSettings);
     gaugeSettings.circleColor = "#4caf50";
     gaugeSettings.waveColor = "#4caf50";
-    var poeGauge = loadLiquidFillGauge("fillgauge4", 0, gaugeSettings);
+    var poeGauge = loadLiquidFillGauge("poe-gauge", 0, gaugeSettings);
+    var escuderoGauge = loadLiquidFillGauge("escudero-gauge", 0, gaugeSettings);
     gaugeSettings.circleColor = "#2196f3";
     gaugeSettings.waveColor = "#2196f3";
-    var duterteGauge = loadLiquidFillGauge("fillgauge5", 0, gaugeSettings);
-   
+    var duterteGauge = loadLiquidFillGauge("duterte-gauge", 0, gaugeSettings);
+    var cayetanoGauge = loadLiquidFillGauge("cayetano-gauge", 0, gaugeSettings);
+    gaugeSettings.circleColor = "#607D8B";
+    gaugeSettings.waveColor = "#607D8B";
+    var trillanesGauge = loadLiquidFillGauge("trillanes-gauge", 0, gaugeSettings);
 
     function NewValue(){
         if(Math.random() > .5){
