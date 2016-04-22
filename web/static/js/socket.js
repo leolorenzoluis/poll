@@ -321,7 +321,18 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 
-channel.on("new:msg", msg => {
+channel.on ("new:msg", msg => {
+          if(msg["id"] === "Miriam Defensor Santiago")
+            santiagoGauge.update(msg["TotalVotes"])  
+          else if(msg["id"] === "Jejomar Cabauatan Binay")
+            binayGauge.update(msg["TotalVotes"])
+          else if(msg["id"] === "Rodrigo Duterte")
+            duterteGauge.update(msg["TotalVotes"])
+          else if(msg["id"] === "Grace Poe")
+            poeGauge.update(msg["TotalVotes"])
+          else if(msg["id"] === "Mar Roxas")
+            roxasGauge.update(msg["TotalVotes"])
+
           var candidatePlaceholder = $("div[id='"+msg["id"]+"']")
           candidatePlaceholder.empty()
           candidatePlaceholder.append(msg["TotalVotes"])
