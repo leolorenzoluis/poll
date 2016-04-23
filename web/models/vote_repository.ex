@@ -21,8 +21,6 @@ defmodule Poll.VoteRepository do
   	end
 
 	def create_vote(currentUser, params, positionType) do
-		IO.puts "CURRENT ISER US"
-		IO.inspect currentUser[:id]
 	    candidate = params["candidate"] 
 
 	    currentCity = get_position(params)
@@ -34,11 +32,19 @@ defmodule Poll.VoteRepository do
 
     	case currentCity do
     		{:ok, value} ->
-			    			db("poll") 
+			    			query = db("poll") 
 						      |> table("users")
 						      |> get(currentUser[:id])
-						      |> update(%{president: candidate})
-						      |> run
+
+						    query = 
+						    	case positionType do 
+							    	"President" -> query 
+							      					|> update(%{president: candidate})
+			      					"Vice-President" -> query 
+							      					|> update(%{vicepresident: candidate})  
+						      	end
+					      	query 
+						    	|> run
 
 						      insert_vote(value, currentUser, candidate, positionType,2)
     	end
