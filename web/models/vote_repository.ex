@@ -21,6 +21,8 @@ defmodule Poll.VoteRepository do
   	end
 
 	def create_vote(currentUser, params, positionType) do
+		IO.puts "CURRENT ISER US"
+		IO.inspect currentUser[:id]
 	    candidate = params["candidate"] 
 
 	    currentCity = get_position(params)
@@ -34,6 +36,7 @@ defmodule Poll.VoteRepository do
     		{:ok, value} ->
 			    			db("poll") 
 						      |> table("users")
+						      |> get(currentUser[:id])
 						      |> update(%{president: candidate})
 						      |> run
 
@@ -72,10 +75,12 @@ defmodule Poll.VoteRepository do
 	end
 
 	def insert_vote(currentCity,currentUser,candidate, positionType, n) when n<= 1 do
-		IO.puts " HELLO WORLD "
-		IO.inspect candidate
+		validCity = 
+			cond do
+				[] -> "OFW"
+				true ->  String.replace(currentCity, " ","")
+			end
 		
-		validCity = String.replace(currentCity, " ","")
  		db("poll")
 	    |> table(validCity)
 	    |> insert(%{userid: currentUser.id, candidate: candidate, position: positionType})

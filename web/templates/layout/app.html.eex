@@ -23,7 +23,7 @@
     <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="demo-header mdl-layout__header mdl-color--blue-800 mdl-color-text--white-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Halalan</span>
+          <span class="mdl-layout-title"><a href="/" class="mdl-color--text-white">Halalan</a></span>
           <div class="mdl-layout-spacer"></div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
             <label class="mdl-button mdl-js-button mdl-button--icon" for="search">

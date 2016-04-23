@@ -19,8 +19,8 @@ defmodule Poll.PollChannel do
     result = run(query)
 
 
-    IO.puts "Inspecting result in poll channel"
-    IO.inspect result
+    #IO.puts "Inspecting result in poll channel"
+    #IO.inspect result
     #result.data 
     #|> Enum.into(%{})
     #|> IO.inspect
@@ -33,8 +33,8 @@ defmodule Poll.PollChannel do
     |> run
 
 
-    IO.puts "Inspecting changes  in info poll channel"
-    IO.inspect changes
+    #IO.puts "Inspecting changes  in info poll channel"
+    #IO.inspect changes
 
     Task.async fn ->
      Enum.each(changes, fn change ->
