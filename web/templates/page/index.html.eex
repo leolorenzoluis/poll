@@ -1,5 +1,5 @@
 <div class="mdl-cell mdl-cell--4-col  mdl-shadow--3dp" id="map-container" style="display:inline-block">
-  <div id="map" class="map"></div>
+  <div id="map" class="map"><div id="info" class="info"></div></div>
 </div>
 <div class="mdl-cell mdl-cell--8-col">
     <section class="mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">

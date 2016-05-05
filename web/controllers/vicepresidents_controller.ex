@@ -21,7 +21,6 @@ defmodule Poll.VicePresidentsController do
   end
 
   def create(conn, _params) do
-    
     currentUser = get_session(conn, :current_user)
     create_vote(currentUser, _params, "Vice-President")
     
@@ -29,7 +28,7 @@ defmodule Poll.VicePresidentsController do
       |> put_flash(:info, "Successfully authenticated.")
       |> assign(:current_user, nil)
       |> assign(:candidates, [])
-      |> redirect(to: "/vote/")
+      |> redirect(to: "/")
 
   end
 end
