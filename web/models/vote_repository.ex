@@ -46,7 +46,7 @@ defmodule Poll.VoteRepository do
 					      	query 
 						    	|> run
 
-						      insert_vote(value, currentUser, candidate, positionType,2)
+					      	insert_vote(value, currentUser, candidate, positionType,2)
     	end
 	end
 

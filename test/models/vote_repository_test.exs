@@ -44,7 +44,7 @@ defmodule Poll.VoteRepositoryTest do
 	test "changefeed process" do
 		q = table(@table_name) |> changes
 		changes =  run(q)
-		t = Task.async fn ->
+		t = Task.async fn ->acenro
 			RethinkDB.Connection.next(changes)
 		end
 
