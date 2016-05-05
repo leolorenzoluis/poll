@@ -60,7 +60,7 @@
 }
 
 #info{
-  position:absolute;
+  position:relative;
   height:1px;
   width:1px;
   z-index:100;

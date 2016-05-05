@@ -183,7 +183,7 @@ $.ajax({
       info.css({
       //  background: "red",
         left:pixel[0] + 'px',
-        top: (pixel[1] + 70) + 'px'
+        top: (pixel[1]) + 'px'
       });
       var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
         return feature;
@@ -191,7 +191,7 @@ $.ajax({
       if(feature) {
         var cityName = feature.getId();
         var totalVotes = feature.get('totalvotes');
-        info.html(cityName + " " + feature.get('NAME_1') + ": " + totalVotes)
+        info.html(cityName + " " + feature.get('NAME_1') + ": " + totalVotes + "</p>")
         /*info.tooltip('hide')
             .attr('data-original-title', cityName + " " + feature.get('NAME_1') + ": " + totalVotes)
             .tooltip('fixTitle')
@@ -314,8 +314,25 @@ window.setInterval(addRandomFeature, 1000)*/
 // Change to promises 
 setTimeout(function() { socket.connect() }, 5000);
 var $messages  = $("#messages")
+
+let citiesChannel = socket.channel("eleksyon:cities", {})
+citiesChannel.join()
+  .receive("ok", resp => { console.log("Joined cities successfully", resp) })
+  .receive("error", resp => { console.log("Unable to join cities", resp) })
+
+citiesChannel.on ("new:msg", msg => { 
+                      if(vectorSource)
+                        {
+                          var feature = vectorSource.getFeatureById(msg.City)
+                          if(feature && msg.TotalVotes != undefined){
+                            var currentTotalVotes = feature.get('totalvotes')
+                            currentTotalVotes += msg.TotalVotes
+                            feature.setProperties({"totalvotes": currentTotalVotes})
+                          }
+                        }
+                  } )
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("eleksyon:lobby", {})
+let channel = socket.channel("eleksyon:gauge", {})
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
@@ -323,41 +340,33 @@ channel.join()
 
 channel.on ("new:msg", msg => {
           if(msg["id"] === "Miriam Defensor Santiago")
-            santiagoGauge.update(msg["TotalVotes"])  
+          { if(typeof santiagoGauge !== 'undefined') santiagoGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Jejomar Cabauatan Binay")
-            binayGauge.update(msg["TotalVotes"])
+          { if(typeof binayGauge !== 'undefined') binayGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Rodrigo Duterte")
-            duterteGauge.update(msg["TotalVotes"])
+          {  if(typeof duterteGauge !== 'undefined') duterteGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Grace Poe")
-            poeGauge.update(msg["TotalVotes"])
+          {  if(typeof poeGauge !== 'undefined') poeGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Mar Roxas")
-            roxasGauge.update(msg["TotalVotes"])
+          { if(typeof roxasGauge !== 'undefined') roxasGauge.update(msg["TotalVotes"]) }
 
           else if(msg["id"] === "Francis Escudero")
-            escuderoGauge.update(msg["TotalVotes"])
+          { if(typeof escuderoGauge !== 'undefined') escuderoGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Antonio Trillanes")
-            trillanesGauge.update(msg["TotalVotes"])
+          { if(typeof trillanesGauge !== 'undefined') trillanesGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Bongbong Marcos")
-            marcosGauge.update(msg["TotalVotes"])
+          { if(typeof marcosGauge !== 'undefined') marcosGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Gringo Honasan")
-            honasanGauge.update(msg["TotalVotes"])
+          { if(typeof honasanGauge !== 'undefined') honasanGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Alan Peter Cayetano")
-            cayetanoGauge.update(msg["TotalVotes"])
+          { if(typeof cayetanoGauge !== 'undefined') cayetanoGauge.update(msg["TotalVotes"]) }
           else if(msg["id"] === "Leni Robredo")
-            robredoGauge.update(msg["TotalVotes"])
+          { if(typeof robredoGauge !== 'undefined') robredoGauge.update(msg["TotalVotes"]) }
           //var candidatePlaceholder = $("div[id='"+msg["id"]+"']")
           //candidatePlaceholder.empty()
           //candidatePlaceholder.append(msg["TotalVotes"])
           //$messages.append(JSON.stringify(msg))
-          //if(vectorSource)
-          //{
-          //  var feature = vectorSource.getFeatureById(msg.city)
-          //  if(feature && msg.count != undefined){
-           //   var currentTotalVotes = feature.get('totalvotes')
-           //   currentTotalVotes += msg.count
-            //  feature.setProperties({"totalvotes": currentTotalVotes})
-          //  }
-          //}
+          
           //source.addFeature(new ol.Feature(new ol.geom.Point(ol.proj.transform(msg.coordinates, 'EPSG:4326', 'EPSG:3857'))));
           //$messages.append(JSON.stringify(msg.coordinates)) 
           //scrollTo(0, document.body.scrollHeight)
