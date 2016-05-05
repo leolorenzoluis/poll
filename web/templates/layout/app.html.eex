@@ -69,8 +69,7 @@
           </div>
         </header>
         <nav class="navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
+          <a class="mdl-navigation__link" href="/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
           <%= link "Logout", to: authentication_path(@conn, :delete), method: :delete, class: "mdl-color-text--blue-grey-400 mdl-navigation__link" %>
         </nav>
       </div>
