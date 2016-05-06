@@ -191,7 +191,7 @@ $.ajax({
       if(feature) {
         var cityName = feature.getId();
         var totalVotes = feature.get('totalvotes');
-        info.html(cityName + " " + feature.get('NAME_1') + ": " + totalVotes + "</p>")
+        info.html('<div class="mdl-tooltip mdl-tooltip--large is-active" style="left:inherit;top:inherit">' + cityName + ": " + totalVotes + "</div>")
         /*info.tooltip('hide')
             .attr('data-original-title', cityName + " " + feature.get('NAME_1') + ": " + totalVotes)
             .tooltip('fixTitle')
@@ -202,17 +202,47 @@ $.ajax({
       }
     };
 
-    map.on('pointermove', function(evt){
+    /*map.on('pointermove', function(evt){
       if(evt.dragging){
         info.html('');
         return;
       }
       displayFeatureInfo(map.getEventPixel(evt.originalEvent));
-    });
+    });*/
 
     map.on('click', function(evt){
       displayFeatureInfo(evt.pixel);
     });
+
+    var selectClick = new ol.interaction.Select({
+      condition: ol.events.condition.click
+    })
+
+    map.addInteraction(selectClick)
+
+    selectClick.on('select', function(evt){
+      var selected = evt.selected;
+      var deselected = evt.deselected;
+      if(selected.length) {
+        selected.forEach(function(feature){
+          console.info(feature)
+          feature.setStyle(new ol.style.Style({
+                              stroke: new ol.style.Stroke({
+                                color: 'yellow',
+                                width: 2
+                              }),
+                              fill: new ol.style.Fill({
+                                color: 'rgba(0,0,255,0.1)'
+                              })
+                            }))
+        })
+      }
+      if(deselected.length) {
+        deselected.forEach(function(feature){
+          feature.setStyle(feature.get('oldStyle'))
+        })
+      }
+    })
 
 
     /* Update Map Size */
@@ -324,10 +354,20 @@ citiesChannel.on ("new:msg", msg => {
                       if(vectorSource)
                         {
                           var feature = vectorSource.getFeatureById(msg.City)
-                          if(feature && msg.TotalVotes != undefined){
+                          if(feature && msg.TotalVotes != undefined && msg.TotalVotes != 0){
                             var currentTotalVotes = feature.get('totalvotes')
                             currentTotalVotes += msg.TotalVotes
                             feature.setProperties({"totalvotes": currentTotalVotes})
+                            feature.setProperties({"oldStyle": feature.setStyle(new ol.style.Style({
+                              stroke: new ol.style.Stroke({
+                                color: 'blue',
+                                width: 2
+                              }),
+                              fill: new ol.style.Fill({
+                                color: 'rgba(0,0,255,0.1)'
+                              })
+                            }))
+                            })
                           }
                         }
                   } )
