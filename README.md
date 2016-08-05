@@ -1,3 +1,3 @@
 # Poll
 
-Playing with Elixir and Phoenix. 
+Playing with Elixir and Phoenix and OpenLayer
